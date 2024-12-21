@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { SEARCH_USERS } from "../graphql/queries";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
-import {artwork} from '@/assets/images'
+import { artwork } from "@/assets/images";
+
 const Home: React.FC = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
@@ -11,6 +12,7 @@ const Home: React.FC = () => {
     variables: { query: searchQuery },
     skip: !searchQuery.trim(),
   });
+
   function useDebounce(callback: Function, delay: number) {
     const timer = useRef<number | null>(null);
 
@@ -23,6 +25,7 @@ const Home: React.FC = () => {
       }, delay);
     };
   }
+
   const users =
     data?.search?.edges?.map(({ node }: any) => ({
       id: node.login,
@@ -38,76 +41,87 @@ const Home: React.FC = () => {
       navigate(`/repositories/${item.id}`);
     }
   };
-  const handleSearchChange = useDebounce((input: string) => {
-    setSearchQuery(input); 
-  }, 350); 
 
-  const formatResult = (item: any) => (
-    <div className="flex items-center">
+  const handleSearchChange = useDebounce((input: string) => {
+    setSearchQuery(input);
+  }, 200);
+
+  // Handle Enter key press to navigate to similar users page
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter" && searchQuery.trim()) {
+      navigate(`/similar-users/${searchQuery}`);
+    }
+  };
+
+const formatResult = (item: any) => (
+  <div className="flex items-center">
+    {item.avatar && (
       <img
         src={item.avatar}
         alt={item.name}
         className="w-8 h-8 rounded-full mr-2"
       />
-      <div>
-        <span className="font-medium">{item.name}</span>
-        <p className="text-sm text-gray-500">{item.bio}</p>
+    )}
+    <div>
+      <span className="font-medium">{item.name}</span>
+      <p className="text-sm text-gray-500">{item.bio}</p>
+    </div>
+  </div>
+);
+
+  return (
+    <div className="relative min-h-screen flex flex-col items-center justify-center bg-[#070036] text-white">
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url(${artwork})` }}
+      ></div>
+
+      {/* Centered Content */}
+      <div className="relative z-10 text-center w-full flex items-center flex-col">
+        <h1 className="text-4xl font-bold mb-4 tracking-wider">GitGet</h1>
+        <p className="text-lg font-light mb-8 tracking-wider opacity-60">
+          Just another GitHub Client
+        </p>
+        <div className="w-1/2">
+          {error && (
+            <p className="text-red-500 text-center mb-4">
+              Error loading users: {error.message}
+            </p>
+          )}
+          <div
+            className="search-wrapper" // Wrapping the ReactSearchAutocomplete
+            onKeyDown={handleKeyDown}
+          >
+            <ReactSearchAutocomplete
+              items={
+                loading || error
+                  ? []
+                  : [
+                      ...users.slice(0, 5), // Display up to 5 users
+                      { id: "view_all", name: `View all users similar to ${searchQuery}`  }, // Always show the "View all users" option
+                    ]
+              }
+              onSearch={handleSearchChange}
+              onSelect={handleOnSelect}
+              placeholder="Enter GitHub username or name"
+              autoFocus
+              formatResult={formatResult}
+              styling={{
+                zIndex: 2,
+                borderRadius: "1rem",
+                border: "none",
+                placeholderColor: "#9ca3af",
+                backgroundColor: "#2E3656",
+                hoverBackgroundColor: "#475569",
+                color: "#ffffff",
+              }}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
-
- return (
-   <div className="relative min-h-screen flex flex-col items-center justify-center bg-[#070036] text-white">
-     {/* Background Image */}
-     <div
-       className="absolute inset-0 bg-cover bg-center"
-       style={{ backgroundImage: `url(${artwork})` }}
-     ></div>
-
-     {/* Centered Content */}
-     <div className="relative z-10 text-center w-full flex items-center flex-col">
-       <h1 className="text-4xl font-bold mb-4 tracking-wider">GitGet</h1>
-       <p className="text-lg font-light mb-8 tracking-wider">
-         Just another GitHub Client
-       </p>
-       <div className="w-1/2">
-         {loading && (
-           <p className="text-gray-500 text-center mb-4">Loading users...</p>
-         )}
-         {error && (
-           <p className="text-red-500 text-center mb-4">
-             Error loading users: {error.message}
-           </p>
-         )}
-         <ReactSearchAutocomplete
-           items={
-             loading || error
-               ? [] // Show no items during loading or error
-               : [
-                   ...users.slice(0, 5),
-                   { id: "view_all", name: "View all users" },
-                 ]
-           }
-           onSearch={handleSearchChange}
-           onSelect={handleOnSelect}
-           placeholder="Enter GitHub username or name"
-           autoFocus
-           formatResult={formatResult}
-           showIcon={false}
-           styling={{
-             zIndex: 2,
-             borderRadius: "1rem",
-             border: "none",
-             placeholderColor: "#9ca3af",
-             backgroundColor: "#2E3656",
-             hoverBackgroundColor: "#475569", // Tailwind bg-gray-600
-             color: "#ffffff",
-           }}
-         />
-       </div>
-     </div>
-   </div>
- );
 };
 
 export default Home;
