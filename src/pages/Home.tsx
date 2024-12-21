@@ -2,8 +2,8 @@ import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { SEARCH_USERS } from "../graphql/queries";
-import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { artwork } from "@/assets/images";
+import SearchAutocomplete from "@/components/SearchAutocomplete";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -44,7 +44,7 @@ const Home: React.FC = () => {
 
   const handleSearchChange = useDebounce((input: string) => {
     setSearchQuery(input);
-  }, 200);
+  }, 250);
 
   // Handle Enter key press to navigate to similar users page
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -53,21 +53,21 @@ const Home: React.FC = () => {
     }
   };
 
-const formatResult = (item: any) => (
-  <div className="flex items-center">
-    {item.avatar && (
-      <img
-        src={item.avatar}
-        alt={item.name}
-        className="w-8 h-8 rounded-full mr-2"
-      />
-    )}
-    <div>
-      <span className="font-medium">{item.name}</span>
-      <p className="text-sm text-gray-500">{item.bio}</p>
+  const formatResult = (item: any) => (
+    <div className="flex items-center">
+      {item.avatar && (
+        <img
+          src={item.avatar}
+          alt={item.name}
+          className="w-8 h-8 rounded-full mr-2"
+        />
+      )}
+      <div>
+        <span className="font-medium">{item.name}</span>
+        <p className="text-sm text-gray-500">{item.bio}</p>
+      </div>
     </div>
-  </div>
-);
+  );
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center bg-[#070036] text-white">
@@ -89,23 +89,22 @@ const formatResult = (item: any) => (
               Error loading users: {error.message}
             </p>
           )}
-          <div
-            className="search-wrapper" // Wrapping the ReactSearchAutocomplete
-            onKeyDown={handleKeyDown}
-          >
-            <ReactSearchAutocomplete
+          <div className="search-wrapper" onKeyDown={handleKeyDown}>
+            <SearchAutocomplete
               items={
                 loading || error
                   ? []
                   : [
                       ...users.slice(0, 5), // Display up to 5 users
-                      { id: "view_all", name: `View all users similar to ${searchQuery}`  }, // Always show the "View all users" option
+                      {
+                        id: "view_all",
+                        name: `View all users similar to ${searchQuery}`,
+                      },
                     ]
               }
               onSearch={handleSearchChange}
               onSelect={handleOnSelect}
-              placeholder="Enter GitHub username or name"
-              autoFocus
+              placeholder="Search GitHub username or name"
               formatResult={formatResult}
               styling={{
                 zIndex: 2,
