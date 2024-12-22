@@ -11,6 +11,17 @@ export const SEARCH_USERS = gql`
             avatarUrl
             bio
             url
+            company
+            repositories {
+              totalCount
+            }
+            followers {
+              totalCount
+            }
+            following {
+              totalCount
+            }
+            createdAt
           }
         }
       }
