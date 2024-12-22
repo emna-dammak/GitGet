@@ -1,14 +1,23 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { SEARCH_USERS } from "../graphql/queries";
+import {
+  SEARCH_USERS,
+  SearchUsersData,
+  SearchUsersVariables,
+  UserNode,
+} from "../graphql/queries";
+
 import { artwork } from "@/assets/images";
 import SearchAutocomplete from "@/components/SearchAutocomplete";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
-  const { data, loading, error } = useQuery(SEARCH_USERS, {
+  const { data, loading, error } = useQuery<
+    SearchUsersData,
+    SearchUsersVariables
+  >(SEARCH_USERS, {
     variables: { query: searchQuery },
     skip: !searchQuery.trim(),
   });
@@ -27,14 +36,19 @@ const Home: React.FC = () => {
   }
 
   const users =
-    data?.search?.edges?.map(({ node }: any) => ({
+    data?.search?.edges?.map(({ node }: { node: UserNode }) => ({
       id: node.login,
       name: node.name || node.login,
       avatar: node.avatarUrl,
       bio: node.bio || "No bio available",
     })) || [];
 
-  const handleOnSelect = (item: any) => {
+  const handleOnSelect = (item: {
+    id: string;
+    name: string;
+    avatar: string;
+    bio: string;
+  }) => {
     if (item.id === "view_all") {
       navigate(`/similar-users/${searchQuery}`);
     } else {
@@ -53,7 +67,11 @@ const Home: React.FC = () => {
     }
   };
 
-  const formatResult = (item: any) => (
+  const formatResult = (item: {
+    avatar: string;
+    name: string;
+    bio: string;
+  }) => (
     <div className="flex items-center">
       {item.avatar && (
         <img

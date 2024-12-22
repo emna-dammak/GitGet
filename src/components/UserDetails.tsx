@@ -3,9 +3,11 @@ import React from "react";
 interface UserDetailsProps {
   name: string;
   username: string;
-  bio: string;
-  stats: string; // Could be replaced with a proper structure later.
-  location: string;
+  bio: string | null;
+  stats: string;
+  followers: string;
+  following : string;
+  location: string | null;
   avatarUrl: string; // Added avatarUrl to props
 }
 
@@ -16,6 +18,8 @@ const UserDetails: React.FC<UserDetailsProps> = ({
   stats,
   location,
   avatarUrl,
+  followers,
+  following
 }) => {
   return (
     <div className="bg-[#2E3656] bg-opacity-90 h-full text-white p-4 rounded-lg flex justify-center w-1/6 fixed">
@@ -29,14 +33,15 @@ const UserDetails: React.FC<UserDetailsProps> = ({
 
         {/* User Info */}
         <h2 className="text-lg font-bold">{name}</h2>
-        <p className="text-sm text-gray-400">@{username}</p>
-        <p className="mt-2 text-sm  overflow-wrap">{bio}</p>
-          <p>
-            <strong>Stats:</strong> {stats}
-          </p>
-          <p>
-            <strong>Location:</strong> {location}
-          </p>
+        <p className="text-sm text-left text-gray-400">@{username}</p>
+        <p className="*: text-sm  overflow-wrap">{bio}</p>
+        <p className="mt-10 text-left">
+           {stats}
+        </p>
+        <p> {followers} . {following}</p>
+        {location && <p>
+          <strong className="text-left">Location:</strong> {location}
+        </p>}
       </div>
     </div>
   );
