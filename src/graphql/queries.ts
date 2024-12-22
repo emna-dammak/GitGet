@@ -32,16 +32,37 @@ export const SEARCH_USERS = gql`
 export const GET_REPOSITORIES = gql`
   query GetRepositories($username: String!) {
     user(login: $username) {
-      repositories(first: 10) {
+      avatarUrl
+      name
+      bio
+      location
+      repositories(first: 100) {
+        totalCount
         nodes {
           id
           name
           description
-          primaryLanguage {
+          languages(first: 5) {
+            edges {
+              node {
+                name
+                color
+              }
+              size
+            }
+          }
+          stargazers {
+            totalCount
+          }
+          licenseInfo {
             name
           }
+          createdAt
+          updatedAt
+          url
         }
       }
     }
   }
 `;
+  
