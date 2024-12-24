@@ -7,12 +7,12 @@ import Pagination from "@/components/Pagination";
 import Navbar from "@/components/NavBar";
 import {
   GET_REPOSITORIES,
+} from "../graphql/queries";
+import{  
   GetRepositoriesData,
   GetRepositoriesVariables,
   LanguageEdge,
-  Repository,
-} from "../graphql/queries";
-
+  Repository} from "../models/repository"
 const RepositoriesPage: React.FC = () => {
   const { username } = useParams<{ username: string }>();
   const [searchTerm, setSearchTerm] = useState("");

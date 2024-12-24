@@ -2,11 +2,11 @@ import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import {
   SEARCH_USERS,
+} from "../graphql/queries";
+import {  
   SearchUsersData,
   SearchUsersEdge,
-  SearchUsersVariables,
-} from "../graphql/queries";
-
+  SearchUsersVariables} from "../models/user"
 import Navbar from "@/components/NavBar";
 import UserCard from "@/components/UserCard";
 import Pagination from "@/components/Pagination";
