@@ -5,7 +5,6 @@ import UserProfile from "@/components/UserDetails";
 import RepositoryCard from "@/components/RepositoryCard";
 import Pagination from "@/components/Pagination";
 import Navbar from "@/components/NavBar";
-import { artwork } from "@/assets/images";
 import {
   GET_REPOSITORIES,
   GetRepositoriesData,
@@ -57,6 +56,7 @@ const RepositoriesPage: React.FC = () => {
       );
 
       setFilteredRepos(searchFilteredRepos);
+      setCurrentPage(1); // Reset page to 1
     }
   }, [data, searchTerm, selectedLanguage]);
 
@@ -84,7 +84,7 @@ const RepositoriesPage: React.FC = () => {
       (data?.user.repositories.nodes.flatMap((repo: Repository) =>
         repo.languages.edges.map((edge: LanguageEdge) => [
           edge.node.name,
-          edge.node.color ?? "#ccc", // Provide a fallback color if null
+          edge.node.color ?? "#ccc",
         ])
       ) ?? []) as [string, string][]
     )
@@ -92,18 +92,12 @@ const RepositoriesPage: React.FC = () => {
 
   return (
     <div
-      className="container min-h-screen flex flex-col bg-[#070036] text-white"
-      style={{
-        backgroundImage: `url(${artwork})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundAttachment: "fixed", // Add this line
-      }}
+      className="min-h-screen flex flex-col bg-[#0d082d] text-white"
     >
       <Navbar />
-      <div className="flex pt-16 z-0">
+      <div className="flex flex-col md:flex-row pt-16 z-0 h-full ">
         {/* Left Profile Section */}
-        <div className="w-1/6">
+        <div className="w-full md:w-1/4  md:top-16 lg:left-0">
           {data && data.user ? (
             <UserProfile
               avatarUrl={data.user.avatarUrl}
@@ -121,31 +115,24 @@ const RepositoriesPage: React.FC = () => {
         </div>
 
         {/* Main Content Section */}
-        <div className="w-3/4 p-4 flex flex-col items-center">
-          <div className="mb-4 w-full flex justify-between self-center px-36">
+        <div className="w-full md:w-3/4 lg:w-5/6 p-4 flex flex-col items-center">
+          <div className="mb-4 md:w-[80%] 2xs:w-full flex flex-col md:flex-row gap-6 justify-center py-4">
             <input
               type="text"
-              className="w-1/2 p-2 rounded bg-[#2E3656] bg-opacity-90"
+              className="w-full md:w-1/2 p-2 rounded-xl bg-[#2E3656] bg-opacity-90"
               placeholder="Search repositories"
               value={searchTerm}
               onChange={handleSearchChange}
             />
 
             <select
-              className="p-2 px-3 bg-[#2E3656] rounded"
+              className="mt-4 md:mt-0 p-2 px-3 bg-[#2E3656] rounded-xl"
               value={selectedLanguage}
               onChange={handleLanguageChange}
             >
               <option value="all">All Languages</option>
               {allLanguages.map((language) => (
                 <option key={language.name} value={language.name}>
-                  <span
-                    className="inline-block w-3 h-3 rounded-full"
-                    style={{
-                      backgroundColor: language.color ?? "#ccc",
-                      color: "#fff",
-                    }}
-                  ></span>{" "}
                   {language.name}
                 </option>
               ))}
@@ -159,6 +146,7 @@ const RepositoriesPage: React.FC = () => {
               key={repo.name}
               name={repo.name}
               description={repo.description}
+              visibility={repo.visibility}
               languages={repo.languages.edges.map((edge: LanguageEdge) => ({
                 name: edge.node.name,
                 color: edge.node.color,

@@ -11,7 +11,7 @@ const IconRenderer: React.FC<IconRendererProps> = ({ language }) => {
 
     if (language.toLowerCase() === "c++")
       IconComponent = icons["cpp"];
-
+    if (language.toLowerCase() === "objective-c") IconComponent = icons["objectivec"];
   if (!IconComponent) {
     IconComponent = icons["generic"];
   }

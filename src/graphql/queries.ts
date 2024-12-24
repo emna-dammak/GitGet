@@ -45,6 +45,7 @@ export interface Repository {
   id: string;
   name: string;
   description?: string;
+  visibility : string;
   languages: {
     edges: LanguageEdge[];
   };
@@ -100,7 +101,7 @@ export interface GetRepositoriesVariables {
 
 export const SEARCH_USERS = gql`
   query SearchUsers($query: String!) {
-    search(query: $query, type: USER, first: 10) {
+    search(query: $query, type: USER, first: 100) {
       edges {
         node {
           ... on User {
@@ -146,6 +147,7 @@ export const GET_REPOSITORIES = gql`
           id
           name
           description
+          visibility
           languages(first: 5) {
             edges {
               node {

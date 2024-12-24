@@ -6,7 +6,7 @@ interface UserDetailsProps {
   bio: string | null;
   stats: string;
   followers: string;
-  following : string;
+  following: string;
   location: string | null;
   avatarUrl: string; // Added avatarUrl to props
 }
@@ -19,29 +19,32 @@ const UserDetails: React.FC<UserDetailsProps> = ({
   location,
   avatarUrl,
   followers,
-  following
+  following,
 }) => {
   return (
-    <div className="bg-[#2E3656] bg-opacity-90 h-full text-white p-4 rounded-lg flex justify-center w-1/6 fixed">
-      <div className="flex flex-col items-center pt-10">
-        {/* User Avatar */}
+    <div
+      className=" text-white p-6 rounded-lg flex flex-col items-center 
+      sm:max-w-full sm:mx-auto md:h-full md:w-1/4 md:fixed  md:left-0  md:overflow-hidden
+      border-r-2 border-slate-800"
+    >
+      <div className="flex flex-col items-center pt-10 max-md:pt-4">
         <img
           src={avatarUrl}
           alt={`${username}'s avatar`}
-          className="w-24 h-24 rounded-full mb-4"
+          className="w-24 h-24 md:w-36 md:h-36 lg:w-44 lg:h-44 rounded-full mb-4"
         />
-
-        {/* User Info */}
         <h2 className="text-lg font-bold">{name}</h2>
-        <p className="text-sm text-left text-gray-400">@{username}</p>
-        <p className="*: text-sm  overflow-wrap">{bio}</p>
-        <p className="mt-10 text-left">
-           {stats}
+        <p className="text-sm text-gray-400">@{username}</p>
+        <p className="text-sm text-gray-300 overflow-wrap">{bio}</p>
+        <p className="mt-4">{stats}</p>
+        <p className="mb-auto">
+          {followers} • {following}
         </p>
-        <p> {followers} . {following}</p>
-        {location && <p>
-          <strong className="text-left">Location:</strong> {location}
-        </p>}
+        {location && (
+          <p>
+            <strong>Location:</strong> {location}
+          </p>
+        )}
       </div>
     </div>
   );
