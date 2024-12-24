@@ -56,7 +56,7 @@ const UserCard: React.FC<UserCardProps> = ({
       ></div>
 
       {/* Stats Section */}
-      <div className="text-sm space-y-2 mt-4  sm:mt-0 self-start">
+      <div className="text-sm space-y-2 mt-4  sm:mt-0 self-center">
         <p>
           <span className="font-bold">Repositories:</span> {repositories}
         </p>

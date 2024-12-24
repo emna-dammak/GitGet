@@ -1,14 +1,24 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { SEARCH_USERS } from "../graphql/queries";
+import {
+  SEARCH_USERS,
+  SearchUsersData,
+  SearchUsersVariables,
+  UserNode,
+} from "../graphql/queries";
+
 import { artwork } from "@/assets/images";
 import SearchAutocomplete from "@/components/SearchAutocomplete";
+import logo from "@/assets/logo-navbar.svg"; 
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
-  const { data, loading, error } = useQuery(SEARCH_USERS, {
+  const { data, loading, error } = useQuery<
+    SearchUsersData,
+    SearchUsersVariables
+  >(SEARCH_USERS, {
     variables: { query: searchQuery },
     skip: !searchQuery.trim(),
   });
@@ -27,14 +37,19 @@ const Home: React.FC = () => {
   }
 
   const users =
-    data?.search?.edges?.map(({ node }: any) => ({
+    data?.search?.edges?.map(({ node }: { node: UserNode }) => ({
       id: node.login,
       name: node.name || node.login,
       avatar: node.avatarUrl,
       bio: node.bio || "No bio available",
     })) || [];
 
-  const handleOnSelect = (item: any) => {
+  const handleOnSelect = (item: {
+    id: string;
+    name: string;
+    avatar: string;
+    bio: string;
+  }) => {
     if (item.id === "view_all") {
       navigate(`/similar-users/${searchQuery}`);
     } else {
@@ -44,7 +59,7 @@ const Home: React.FC = () => {
 
   const handleSearchChange = useDebounce((input: string) => {
     setSearchQuery(input);
-  }, 250);
+  }, 100);
 
   // Handle Enter key press to navigate to similar users page
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -53,7 +68,11 @@ const Home: React.FC = () => {
     }
   };
 
-  const formatResult = (item: any) => (
+  const formatResult = (item: {
+    avatar: string;
+    name: string;
+    bio: string;
+  }) => (
     <div className="flex items-center">
       {item.avatar && (
         <img
@@ -79,7 +98,8 @@ const Home: React.FC = () => {
 
       {/* Centered Content */}
       <div className="relative z-10 text-center w-full flex items-center flex-col">
-        <h1 className="text-4xl font-bold mb-4 tracking-wider">GitGet</h1>
+        <img src={logo} alt="Logo" className="h-32 w-32 opacity-70" />
+        <h1 className="text-4xl font-bold mb-4 tracking-wider opacity-70">GitGet</h1>
         <p className="text-lg font-light mb-8 tracking-wider opacity-60">
           Just another GitHub Client
         </p>
