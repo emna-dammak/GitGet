@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import {
   SEARCH_USERS,
-  SearchUsersData,
+} from "../graphql/queries";
+import {
+    SearchUsersData,
   SearchUsersVariables,
   UserNode,
-} from "../graphql/queries";
-
+} from "../models/user"
 import { artwork } from "@/assets/images";
 import SearchAutocomplete from "@/components/SearchAutocomplete";
 import logo from "@/assets/logo-navbar.svg"; 
