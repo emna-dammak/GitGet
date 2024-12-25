@@ -1,17 +1,17 @@
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
+import { SEARCH_USERS } from "../graphql/queries";
 import {
-  SEARCH_USERS,
-} from "../graphql/queries";
-import {  
   SearchUsersData,
   SearchUsersEdge,
-  SearchUsersVariables} from "../models/user"
+  SearchUsersVariables,
+} from "../models/user";
 import Navbar from "@/components/NavBar";
 import UserCard from "@/components/UserCard";
 import Pagination from "@/components/Pagination";
 import { useState } from "react";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import NotFound from "@/components/NotFound";
 
 const SimilarUsers: React.FC = () => {
   const { query } = useParams<{ query: string }>();
@@ -33,14 +33,14 @@ const SimilarUsers: React.FC = () => {
 
   // Type-safe users array
   const users = data?.search?.edges ?? [];
- const handlePageChange = (page: number) => {
-   setCurrentPage(page);
- };
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
- const displayedUsers = users.slice(
-   (currentPage - 1) * usersPerPage,
-   currentPage * usersPerPage
- );
+  const displayedUsers = users.slice(
+    (currentPage - 1) * usersPerPage,
+    currentPage * usersPerPage
+  );
   if (loading)
     return (
       <div className="min-h-screen flex  bg-[#0d082d] text-white justify-center ">
@@ -51,31 +51,37 @@ const SimilarUsers: React.FC = () => {
     <div className="min-h-screen flex flex-col bg-[#0d082d] text-white">
       {/* Navbar */}
       <Navbar />
-
-      {/* User List */}
-      <div className="container mx-auto mt-16">
-        <ul className="w-full max-w-3xl mx-auto">
-          {displayedUsers.map(({ node }: SearchUsersEdge, index: number) => (
-            <UserCard
-              key={index}
-              avatarUrl={node.avatarUrl}
-              name={node.name || ""}
-              login={node.login}
-              bio={node.bio || ""}
-              company={node.company || ""}
-              repositories={node.repositories?.totalCount}
-              followers={node.followers.totalCount}
-              following={node.following.totalCount}
-              joinedAt={node.createdAt}
-            />
-          ))}
-        </ul>
-        <Pagination
-          currentPage={currentPage}
-          totalPages={Math.ceil(users.length / usersPerPage)}
-          onPageChange={handlePageChange}
+      {displayedUsers.length > 0 ? (
+        // User List
+        <div className="container mx-auto mt-16">
+          <ul className="w-full max-w-3xl mx-auto">
+            {displayedUsers.map(({ node }: SearchUsersEdge, index: number) => (
+              <UserCard
+                key={index}
+                avatarUrl={node.avatarUrl}
+                name={node.name || ""}
+                login={node.login}
+                bio={node.bio || ""}
+                company={node.company || ""}
+                repositories={node.repositories?.totalCount}
+                followers={node.followers.totalCount}
+                following={node.following.totalCount}
+                joinedAt={node.createdAt}
+              />
+            ))}
+          </ul>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={Math.ceil(users.length / usersPerPage)}
+            onPageChange={handlePageChange}
+          />
+        </div>
+      ) : (
+        <NotFound
+          type="user"
+          message="We couldn’t find a user with username specified. Either your input is wrong and doesn’t match any records in the database or our curious GitGet cat has stolen the record."
         />
-      </div>
+      )}
     </div>
   );
 };

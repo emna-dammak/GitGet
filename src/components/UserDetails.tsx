@@ -4,23 +4,44 @@ export interface UserDetailsProps {
   name: string;
   username: string;
   bio: string | null;
-  stats: string;
+  repositoryCount: string;
   followers: string;
   following: string;
   location: string | null;
   avatarUrl: string; // Added avatarUrl to props
 }
 
+
+
 const UserDetails: React.FC<UserDetailsProps> = ({
   name,
   username,
   bio,
-  stats,
+  repositoryCount,
   location,
   avatarUrl,
   followers,
   following,
 }) => {
+
+  const stats = [
+    {
+      name: "Repositories",
+      value: repositoryCount,
+      icon: "Repositories.svg",
+    },
+    {
+      name: "Followers",
+      value: followers,
+      icon: "Followers.svg",
+    },
+    {
+      name: "Following",
+      value: following,
+      icon: "Following.svg",
+    },
+  ];
+
   return (
     <div
       className="bg-[#0d082d] bg-opacity-50 text-white p-6 rounded-lg flex flex-col items-center 
@@ -36,10 +57,18 @@ const UserDetails: React.FC<UserDetailsProps> = ({
         <h2 className="text-lg font-bold">{name}</h2>
         <p className="text-sm text-gray-400">@{username}</p>
         <p className="text-sm text-gray-300 overflow-wrap">{bio}</p>
-        <p className="mt-4">{stats}</p>
-        <p className="mb-auto">
-          {followers} • {following}
-        </p>
+        <div className="flex flex-col max-md:flex-row max-sm:flex-wrap justify-center gap-4 mt-8 w-full">
+          {stats.map((stat) => (
+            <div key={stat.name} className="flex items-center mt-2">
+              <img src={`/${stat.icon}`} className="mr-2 opacity-70"/>
+              <div className="text-sm">
+                <span className="opacity-70">{stat.name}: </span>
+                <span>{stat.value}</span>
+              </div>
+            </div>
+          ))
+          }
+        </div>
         {location && (
           <p>
             <strong>Location:</strong> {location}

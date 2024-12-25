@@ -6,14 +6,13 @@ import UserProfile from "@/components/UserDetails";
 import RepositoryCard from "@/components/RepositoryCard";
 import Pagination from "@/components/Pagination";
 import Navbar from "@/components/NavBar";
+import { GET_REPOSITORIES } from "../graphql/queries";
 import {
-  GET_REPOSITORIES,
-} from "../graphql/queries";
-import{  
   GetRepositoriesData,
   GetRepositoriesVariables,
   LanguageEdge,
-  Repository} from "../models/repository"
+  Repository,
+} from "../models/repository";
 import LoadingSpinner from "@/components/LoadingSpinner";
 const RepositoriesPage: React.FC = () => {
   const { username } = useParams<{ username: string }>();
@@ -91,16 +90,14 @@ const RepositoriesPage: React.FC = () => {
       ) ?? []) as [string, string][]
     )
   ).map(([name, color]) => ({ name, color }));
-   if (loading)
-     return (
-       <div className="min-h-screen flex  bg-[#0d082d] text-white justify-center ">
-         <LoadingSpinner width="75" strokeWidth="1" strokeColor="white" />
-       </div>
-     );
+  if (loading)
+    return (
+      <div className="min-h-screen flex  bg-[#0d082d] text-white justify-center ">
+        <LoadingSpinner width="75" strokeWidth="1" strokeColor="white" />
+      </div>
+    );
   return (
-    <div
-      className="min-h-screen flex flex-col bg-[#0d082d] text-white"
-    >
+    <div className="min-h-screen flex flex-col bg-[#0d082d] text-white">
       <Navbar />
       <div className="flex flex-col md:flex-row pt-16 z-0 h-full ">
         {/* Left Profile Section */}
@@ -111,10 +108,10 @@ const RepositoriesPage: React.FC = () => {
               name={data.user.name || ""}
               username={username || ""}
               bio={data.user.bio}
-              stats={`${data.user.repositories.totalCount} repositories`}
+              repositoryCount={`${data.user.repositories.totalCount}`}
               location={data.user.location}
-              followers={`${data.user.followers.totalCount} followers`}
-              following={`${data.user.following.totalCount} followings`}
+              followers={`${data.user.followers.totalCount}`}
+              following={`${data.user.following.totalCount}`}
             />
           ) : (
             <p>Loading profile...</p>
