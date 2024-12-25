@@ -11,7 +11,6 @@ import { artwork } from "@/assets/images";
 import SearchAutocomplete from "@/components/SearchAutocomplete";
 import logo from "@/assets/logo-navbar.svg";
 
-
 const Home: React.FC = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
@@ -105,14 +104,12 @@ const Home: React.FC = () => {
         <p className="text-lg font-light mb-8 tracking-wider opacity-60">
           Just another GitHub Client
         </p>
-        <div className="w-1/2">
+        <div className="w-1/2 max-xl:w-7/12 max-lg:w-8/12 max-md:w-11/12 max-xs:w-full px-4 ">
           {error && (
             <p className="text-red-500 text-center mb-4">
               Error loading users: {error.message}
             </p>
           )}
-
-    
 
           <div className="search-wrapper" onKeyDown={handleKeyDown}>
             <SearchAutocomplete

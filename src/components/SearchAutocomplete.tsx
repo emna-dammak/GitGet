@@ -100,7 +100,7 @@ const SearchAutocomplete: React.FC<SearchAutocompleteProps> = ({
                 color: "#ffffff",
               }}
             >
-              No results found
+              Fetching results...
             </li>
           )}
         </ul>
