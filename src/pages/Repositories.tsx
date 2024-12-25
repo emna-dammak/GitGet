@@ -13,6 +13,7 @@ import{
   GetRepositoriesVariables,
   LanguageEdge,
   Repository} from "../models/repository"
+import LoadingSpinner from "@/components/LoadingSpinner";
 const RepositoriesPage: React.FC = () => {
   const { username } = useParams<{ username: string }>();
   const [searchTerm, setSearchTerm] = useState("");
@@ -90,6 +91,12 @@ const RepositoriesPage: React.FC = () => {
     )
   ).map(([name, color]) => ({ name, color }));
 
+   if (loading)
+     return (
+       <div className="min-h-screen flex  bg-[#0d082d] text-white justify-center ">
+         <LoadingSpinner width="75" strokeWidth="1" strokeColor="white" />
+       </div>
+     );
   return (
     <div
       className="min-h-screen flex flex-col bg-[#0d082d] text-white"
