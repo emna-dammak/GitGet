@@ -1,6 +1,6 @@
 import JavaScriptIcon from "@/assets/icons/Javascript.svg";
 import TypeScriptIcon from "@/assets/icons/Typescript.svg";
-import JavaIcon from "@/assets/icons/Java.svg";
+import JavaIcon from "@/assets/icons/JAVA.svg";
 import HTMLIcon from "@/assets/icons/HTML.svg";
 import CSSIcon from "@/assets/icons/CSS.svg";
 import PythonIcon from "@/assets/icons/Python.svg";
