@@ -1,4 +1,4 @@
-import JavaScriptIcon from "@/assets/icons/javascript.svg";
+import JavaScriptIcon from "@/assets/icons/Javascript.svg";
 import TypeScriptIcon from "@/assets/icons/Typescript.svg";
 import JavaIcon from "@/assets/icons/Java.svg";
 import HTMLIcon from "@/assets/icons/HTML.svg";
