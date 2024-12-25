@@ -11,6 +11,7 @@ import Navbar from "@/components/NavBar";
 import UserCard from "@/components/UserCard";
 import Pagination from "@/components/Pagination";
 import { useState } from "react";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 const SimilarUsers: React.FC = () => {
   const { query } = useParams<{ query: string }>();
@@ -28,7 +29,6 @@ const SimilarUsers: React.FC = () => {
     skip: !query,
   });
 
-  if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
   // Type-safe users array
@@ -41,7 +41,12 @@ const SimilarUsers: React.FC = () => {
    (currentPage - 1) * usersPerPage,
    currentPage * usersPerPage
  );
-
+  if (loading)
+    return (
+      <div className="min-h-screen flex  bg-[#0d082d] text-white justify-center ">
+        <LoadingSpinner width="75" strokeWidth="1" strokeColor="white" />
+      </div>
+    );
   return (
     <div className="min-h-screen flex flex-col bg-[#0d082d] text-white">
       {/* Navbar */}

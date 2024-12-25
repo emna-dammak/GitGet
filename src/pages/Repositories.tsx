@@ -91,9 +91,12 @@ const RepositoriesPage: React.FC = () => {
       ) ?? []) as [string, string][]
     )
   ).map(([name, color]) => ({ name, color }));
-  if(loading) return  <div className="p-10 w-full flex items-center justify-center lg:min-h-96">
-      <LoadingSpinner width="75" strokeWidth="1" strokeColor="grey" />
-    </div>;
+   if (loading)
+     return (
+       <div className="min-h-screen flex  bg-[#0d082d] text-white justify-center ">
+         <LoadingSpinner width="75" strokeWidth="1" strokeColor="white" />
+       </div>
+     );
   return (
     <div
       className="min-h-screen flex flex-col bg-[#0d082d] text-white"
