@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
+
 import UserProfile from "@/components/UserDetails";
 import RepositoryCard from "@/components/RepositoryCard";
 import Pagination from "@/components/Pagination";
@@ -13,6 +14,7 @@ import{
   GetRepositoriesVariables,
   LanguageEdge,
   Repository} from "../models/repository"
+import LoadingSpinner from "@/components/LoadingSpinner";
 const RepositoriesPage: React.FC = () => {
   const { username } = useParams<{ username: string }>();
   const [searchTerm, setSearchTerm] = useState("");
@@ -89,7 +91,9 @@ const RepositoriesPage: React.FC = () => {
       ) ?? []) as [string, string][]
     )
   ).map(([name, color]) => ({ name, color }));
-
+  if(loading) return  <div className="p-10 w-full flex items-center justify-center lg:min-h-96">
+      <LoadingSpinner width="75" strokeWidth="1" strokeColor="grey" />
+    </div>;
   return (
     <div
       className="min-h-screen flex flex-col bg-[#0d082d] text-white"

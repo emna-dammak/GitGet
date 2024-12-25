@@ -1,17 +1,16 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@apollo/client";
+import { SEARCH_USERS } from "../graphql/queries";
 import {
-  SEARCH_USERS,
-} from "../graphql/queries";
-import {
-    SearchUsersData,
+  SearchUsersData,
   SearchUsersVariables,
   UserNode,
-} from "../models/user"
+} from "../models/user";
 import { artwork } from "@/assets/images";
 import SearchAutocomplete from "@/components/SearchAutocomplete";
-import logo from "@/assets/logo-navbar.svg"; 
+import logo from "@/assets/logo-navbar.svg";
+
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -82,8 +81,8 @@ const Home: React.FC = () => {
           className="w-8 h-8 rounded-full mr-2"
         />
       )}
-      <div>
-        <span className="font-medium">{item.name}</span>
+      <div className="flex flex-col justify-end text-left">
+        <span className="font-medium leading-4">{item.name}</span>
         <p className="text-sm text-gray-500">{item.bio}</p>
       </div>
     </div>
@@ -112,6 +111,9 @@ const Home: React.FC = () => {
               Error loading users: {error.message}
             </p>
           )}
+
+    
+
           <div className="search-wrapper" onKeyDown={handleKeyDown}>
             <SearchAutocomplete
               items={
@@ -131,11 +133,8 @@ const Home: React.FC = () => {
               formatResult={formatResult}
               styling={{
                 zIndex: 2,
-                borderRadius: "1rem",
                 border: "none",
-                placeholderColor: "#9ca3af",
                 backgroundColor: "#2E3656",
-                hoverBackgroundColor: "#475569",
                 color: "#ffffff",
               }}
             />
