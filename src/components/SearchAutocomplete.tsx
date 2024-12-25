@@ -1,7 +1,7 @@
 import React from "react";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 
-interface SearchAutocompleteProps {
+export interface SearchAutocompleteProps {
   items: any[]; // The items to be displayed in the autocomplete dropdown
   onSearch: (query: string) => void; // Callback to handle search input change
   onSelect: (item: any) => void; // Callback when an item is selected

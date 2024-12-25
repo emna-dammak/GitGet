@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-interface UserCardProps {
+export interface UserCardProps {
   avatarUrl: string;
   name: string;
   login: string;
@@ -56,9 +56,9 @@ const UserCard: React.FC<UserCardProps> = ({
       ></div>
 
       {/* Stats Section */}
-      <div className="text-sm space-y-2 mt-4  sm:mt-0 self-center">
+      <div className="text-sm  mt-4  sm:mt-0 self-center  2xs:max-md:grid 2xs:max-md:grid-cols-2  2xs:max-md:gap-5">
         <p>
-          <span className="font-bold">Repositories:</span> {repositories}
+          <span className="font-bold ">Repositories:</span> {repositories}
         </p>
         <p>
           <span className="font-bold">Followers:</span> {followers}

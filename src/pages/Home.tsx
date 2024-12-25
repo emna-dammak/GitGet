@@ -90,7 +90,7 @@ const Home: React.FC = () => {
   );
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center bg-[#070036] text-white">
+    <div className="relative min-h-screen flex flex-col items-center justify-center bg-[#0d082d] text-white">
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center"
@@ -100,7 +100,9 @@ const Home: React.FC = () => {
       {/* Centered Content */}
       <div className="relative z-10 text-center w-full flex items-center flex-col">
         <img src={logo} alt="Logo" className="h-32 w-32 opacity-70" />
-        <h1 className="text-4xl font-bold mb-4 tracking-wider opacity-70">GitGet</h1>
+        <h1 className="text-4xl font-bold mb-4 tracking-wider opacity-70">
+          GitGet
+        </h1>
         <p className="text-lg font-light mb-8 tracking-wider opacity-60">
           Just another GitHub Client
         </p>

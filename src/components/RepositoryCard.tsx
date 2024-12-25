@@ -8,7 +8,7 @@ interface Language {
   color: string | null;
 }
 
-interface RepositoryCardProps {
+export interface RepositoryCardProps {
   name: string;
   description: string | undefined;
   languages: Language[];

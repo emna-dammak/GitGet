@@ -1,6 +1,6 @@
 import React from "react";
 
-interface UserDetailsProps {
+export interface UserDetailsProps {
   name: string;
   username: string;
   bio: string | null;
@@ -23,7 +23,7 @@ const UserDetails: React.FC<UserDetailsProps> = ({
 }) => {
   return (
     <div
-      className=" text-white p-6 rounded-lg flex flex-col items-center 
+      className="bg-[#0d082d] bg-opacity-50 text-white p-6 rounded-lg flex flex-col items-center 
       sm:max-w-full sm:mx-auto md:h-full md:w-1/4 md:fixed  md:left-0  md:overflow-hidden
       border-r-2 border-slate-800"
     >
