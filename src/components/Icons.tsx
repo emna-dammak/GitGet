@@ -26,7 +26,7 @@ import JuliaIcon from "@/assets/icons/Julia.svg";
 import JupyterNotebookIcon from "@/assets/icons/JupyterNotebook.svg";
 import MonkeyCIcon from "@/assets/icons/MonkeyC.svg";
 import ObjectiveCIcon from "@/assets/icons/ObjectiveC.svg";
-import PowerShellIcon from "@/assets/icons/PowerShell.svg";
+import PowerShellIcon from "@/assets/icons/Powershell.svg";
 import SQFIcon from "@/assets/icons/SQF.svg";
 import TexIcon from "@/assets/icons/TeX.svg";
 import VimScriptsIcon from "@/assets/icons/VimScripts.svg";
