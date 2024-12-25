@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
+
 import UserProfile from "@/components/UserDetails";
 import RepositoryCard from "@/components/RepositoryCard";
 import Pagination from "@/components/Pagination";
@@ -90,7 +91,6 @@ const RepositoriesPage: React.FC = () => {
       ) ?? []) as [string, string][]
     )
   ).map(([name, color]) => ({ name, color }));
-
    if (loading)
      return (
        <div className="min-h-screen flex  bg-[#0d082d] text-white justify-center ">
