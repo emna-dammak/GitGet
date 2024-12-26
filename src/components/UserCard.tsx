@@ -29,11 +29,13 @@ const UserCard: React.FC<UserCardProps> = ({
   return (
     <div className="bg-[#2E3656] opacity-70 text-white rounded-xl shadow-lg px-10 py-2 flex flex-col sm:flex-row items-center mt-5 mx-5">
       {/* Profile Picture */}
-      <img
-        src={avatarUrl || ""}
-        alt={login}
-        className="w-20 h-20 rounded-full object-cover mr-4 mb-4 sm:mb-0"
-      />
+      {avatarUrl && (
+        <img
+          src={avatarUrl || ""}
+          alt={login}
+          className="w-20 h-20 rounded-full object-cover mr-4 mb-4 sm:mb-0"
+        />
+      )}
       {/* User Info */}
       <div className="flex-1 sm:mr-4">
         <div>
@@ -41,11 +43,11 @@ const UserCard: React.FC<UserCardProps> = ({
             className="text-2xl font-semibold hover:underline cursor-pointer"
             onClick={() => navigate(`/repositories/${login}`)}
           >
-            {name || ""}{" "}
+            <span>{name } </span>
             <span className="text-gray-400 text-lg font-light">{login}</span>
           </h2>
-          <p className="text-sm text-gray-400 mt-1">{company || ""}</p>
-          <p className="text-sm mt-2">{bio || ""}</p>
+          {company && <p className="text-sm text-gray-400 mt-1">{company}</p>}
+          {bio && <p className="text-sm mt-2">{bio}</p>}
         </div>
       </div>
 
