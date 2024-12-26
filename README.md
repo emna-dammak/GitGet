@@ -57,6 +57,7 @@ npm run storybook
 The project is deployed on Netlify.
 ## Project Structure
 
+```plaintext
 src/
 ├── 📂 assets/      # Static resources
 ├── 🧩 components/  # Reusable UI components
@@ -67,7 +68,7 @@ src/
     ├── Home/
     ├── Repositories/
     └── SimilarUsers/
-
+```
 ## Future Improvements
 1. Add repository sorting options
 2. Enhance error handling and loading states
