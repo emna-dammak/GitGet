@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import NotFound, { NotFoundProps } from "./NotFound";
-import React from "react";
 
 describe("NotFound Component", () => {
   const defaultProps: NotFoundProps = {
