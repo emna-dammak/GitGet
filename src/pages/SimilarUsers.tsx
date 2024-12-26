@@ -120,7 +120,7 @@ const SimilarUsers: React.FC = () => {
               />
             ))}
           </ul>
-        { displayedUsers.length >usersPerPage && <Pagination
+        { users.length >usersPerPage && <Pagination
             currentPage={currentPage}
             totalPages={Math.ceil(users.length / usersPerPage)}
             onPageChange={handlePageChange}

@@ -208,7 +208,7 @@ const RepositoriesPage: React.FC = () => {
               />
             ))}
 
-            {displayedRepos.length > reposPerPage && (
+            {filteredRepos.length > reposPerPage && (
               <Pagination
                 currentPage={currentPage}
                 totalPages={Math.ceil(filteredRepos.length / reposPerPage)}
