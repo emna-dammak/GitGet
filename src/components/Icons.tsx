@@ -34,7 +34,7 @@ import ZILIcon from "@/assets/icons/ZIL.svg";
 import PerlIcon from "@/assets/icons/Perl.svg";
 import RIcon from "@/assets/icons/R.svg";
 import AssemblyIcon from "@/assets/icons/Assembly.svg";
-import DockerFileIcon from "@/assets/icons/DockerFile.svg";
+import DockerFileIcon from "@/assets/icons/Dockerfile.svg";
 import EJSIcon from "@/assets/icons/EJS.svg";
 import MakefileIcom from "@/assets/icons/Makefile.svg";
 import MDXIcon from "@/assets/icons/MDX.svg";
