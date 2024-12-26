@@ -2,7 +2,7 @@ import type { ComponentProps, FC } from "react";
 
 import { RotatingLines } from "react-loader-spinner";
 
-interface LoadingSpinnerProps extends ComponentProps<typeof RotatingLines> {}
+export interface LoadingSpinnerProps extends ComponentProps<typeof RotatingLines> {}
 
 const LoadingSpinner: FC<LoadingSpinnerProps> = ({ ...props }) => {
   return (
