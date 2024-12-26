@@ -13,7 +13,8 @@ const NotFound: React.FC<NotFoundProps> = ({
     return (
         <div className="w-full h-lvh flex justify-center items-center">
             <div className="flex flex-col justify-center items-center m-auto">
-                <img src="/GitGet-simplified.svg" className="w-24"/>
+                <img src="/GitGet-simplified.svg" alt="GitGet logo"
+                className="w-24"/>
                 <div className="flex-1 sm:mr-4 text-center w-[500px] mt-4">
                     <div>
                         <h2
