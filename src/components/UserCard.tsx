@@ -13,6 +13,22 @@ export interface UserCardProps {
   joinedAt: string;
 }
 
+/**
+ * UserCard component displays a user's profile information including avatar, name, login, bio, company, repositories, followers, following, and join date.
+ *
+ * @component
+ * @param {UserCardProps} props - The properties for the UserCard component.
+ * @param {string} props.avatarUrl - The URL of the user's avatar image.
+ * @param {string} props.name - The name of the user.
+ * @param {string} props.login - The login username of the user.
+ * @param {string} props.bio - The bio of the user.
+ * @param {string} props.company - The company the user is associated with.
+ * @param {number} props.repositories - The number of repositories the user has.
+ * @param {number} props.followers - The number of followers the user has.
+ * @param {number} props.following - The number of users the user is following.
+ * @param {string} props.joinedAt - The date the user joined, in ISO format.
+ * @returns {JSX.Element} The rendered UserCard component.
+ */
 const UserCard: React.FC<UserCardProps> = ({
   avatarUrl,
   name,

@@ -9,6 +9,31 @@ export interface SearchAutocompleteProps {
   styling?: React.CSSProperties; // Optional custom styling for the search input
 }
 
+/**
+ * SearchAutocomplete component provides an input field with an autocomplete dropdown.
+ * It allows users to search and select items from a list of suggestions.
+ *
+ * @component
+ * @param {SearchAutocompleteProps} props - The props for the SearchAutocomplete component.
+ * @param {Array<any>} props.items - The list of items to display in the dropdown.
+ * @param {function} props.onSearch - Callback function to perform search when input changes.
+ * @param {function} props.onSelect - Callback function triggered when an item is selected.
+ * @param {string} props.placeholder - Placeholder text for the input field.
+ * @param {function} props.formatResult - Function to format the display of each item in the dropdown.
+ * @param {React.CSSProperties} [props.styling] - Optional custom styling for the input and dropdown.
+ *
+ * @returns {JSX.Element} The rendered SearchAutocomplete component.
+ *
+ * @example
+ * <SearchAutocomplete
+ *   items={items}
+ *   onSearch={handleSearch}
+ *   onSelect={handleSelect}
+ *   placeholder="Search..."
+ *   formatResult={(item) => item.name}
+ *   styling={{ backgroundColor: 'white' }}
+ * />
+ */
 const SearchAutocomplete: React.FC<SearchAutocompleteProps> = ({
   items,
   onSearch,

@@ -14,6 +14,42 @@ import {
   Repository,
 } from "../models/repository";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import NotFound from "@/components/NotFound";
+/**
+ * RepositoriesPage component displays a user's GitHub repositories with filtering and pagination.
+ * 
+ * @component
+ * @example
+ * ```tsx
+ * <RepositoriesPage />
+ * ```
+ * 
+ * @returns {JSX.Element} The rendered RepositoriesPage component.
+ * 
+ * @remarks
+ * This component fetches repositories for a given GitHub username using GraphQL and displays them with options to filter by language and search by repository name. It also includes pagination to navigate through the repositories.
+ * 
+ * @requires
+ * - `useParams` from `react-router-dom` to get the username from the URL.
+ * - `useState` and `useEffect` from `react` for state management and side effects.
+ * - `useQuery` from `@apollo/client` to fetch data using GraphQL.
+ * 
+ * @param {Object} props - The props object.
+ * 
+ * @property {string} username - The GitHub username obtained from the URL parameters.
+ * @property {string} searchTerm - The search term for filtering repositories by name.
+ * @property {Repository[]} filteredRepos - The list of filtered repositories based on search term and selected language.
+ * @property {string} selectedLanguage - The selected programming language for filtering repositories.
+ * @property {number} currentPage - The current page number for pagination.
+ * @property {number} reposPerPage - The number of repositories to display per page.
+ * 
+ * @returns {JSX.Element} The rendered RepositoriesPage component.
+ * 
+ * @example
+ * ```tsx
+ * <RepositoriesPage />
+ * ```
+ */
 const RepositoriesPage: React.FC = () => {
   const { username } = useParams<{ username: string }>();
   const [searchTerm, setSearchTerm] = useState("");
@@ -119,56 +155,73 @@ const RepositoriesPage: React.FC = () => {
         </div>
 
         {/* Main Content Section */}
-        <div className="w-full md:w-3/4 lg:w-5/6 p-4 flex flex-col items-center">
-          <div className="mb-4 md:w-[80%] 2xs:w-full flex flex-col md:flex-row gap-6 justify-center py-4">
-            <input
-              type="text"
-              className="w-full md:w-1/2 p-2 rounded-xl bg-[#2E3656] bg-opacity-90"
-              placeholder="Search repositories"
-              value={searchTerm}
-              onChange={handleSearchChange}
-            />
+        {displayedRepos.length > 0 ? (
+          <div className="w-full md:w-3/4 lg:w-5/6 p-4 flex flex-col items-center">
+            <div className="mb-4 md:w-[80%] 2xs:w-full flex flex-col md:flex-row gap-6 justify-center py-4">
+              <input
+                type="text"
+                className="w-full md:w-1/2 p-2 rounded-xl bg-[#2E3656] bg-opacity-90"
+                placeholder="Search repositories"
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
 
-            <select
-              className="mt-4 md:mt-0 p-2 px-3 bg-[#2E3656] rounded-xl"
-              value={selectedLanguage}
-              onChange={handleLanguageChange}
-            >
-              <option value="all">All Languages</option>
-              {allLanguages.map((language) => (
-                <option key={language.name} value={language.name}>
-                  {language.name}
-                </option>
-              ))}
-            </select>
+              <select
+                className="mt-4 md:mt-0 p-2 px-3 bg-[#2E3656] rounded-xl"
+                value={selectedLanguage}
+                onChange={handleLanguageChange}
+              >
+                <option value="all">All Languages</option>
+                {allLanguages.map((language) => (
+                  <option key={language.name} value={language.name}>
+                    {language.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {loading && (
+              <div className="min-h-screen flex  bg-[#0d082d] text-white justify-center ">
+                <LoadingSpinner
+                  width="75"
+                  strokeWidth="1"
+                  strokeColor="white"
+                />
+              </div>
+            )}
+            {error && <NotFound type="repository" message={error.message} />}
+            {displayedRepos.map((repo: Repository) => (
+              <RepositoryCard
+                key={repo.name}
+                name={repo.name}
+                description={repo.description}
+                visibility={repo.visibility}
+                languages={repo.languages.edges.map((edge: LanguageEdge) => ({
+                  name: edge.node.name,
+                  color: edge.node.color,
+                }))}
+                stars={repo.stargazers.totalCount}
+                license={repo.licenseInfo?.name}
+                createdAt={repo.createdAt}
+                updatedAt={repo.updatedAt}
+                url={repo.url}
+              />
+            ))}
+
+            {displayedRepos.length > reposPerPage && (
+              <Pagination
+                currentPage={currentPage}
+                totalPages={Math.ceil(filteredRepos.length / reposPerPage)}
+                onPageChange={handlePageChange}
+              />
+            )}
           </div>
-
-          {loading && <p>Loading...</p>}
-          {error && <p>Error: {error.message}</p>}
-          {displayedRepos.map((repo: Repository) => (
-            <RepositoryCard
-              key={repo.name}
-              name={repo.name}
-              description={repo.description}
-              visibility={repo.visibility}
-              languages={repo.languages.edges.map((edge: LanguageEdge) => ({
-                name: edge.node.name,
-                color: edge.node.color,
-              }))}
-              stars={repo.stargazers.totalCount}
-              license={repo.licenseInfo?.name}
-              createdAt={repo.createdAt}
-              updatedAt={repo.updatedAt}
-              url={repo.url}
-            />
-          ))}
-
-          <Pagination
-            currentPage={currentPage}
-            totalPages={Math.ceil(filteredRepos.length / reposPerPage)}
-            onPageChange={handlePageChange}
+        ) : (
+          <NotFound
+            type="repository"
+            message="This user has no repository yet!"
           />
-        </div>
+        )}
       </div>
     </div>
   );

@@ -5,6 +5,19 @@ export interface NotFoundProps {
   message: string;
 }
 
+/**
+ * NotFound component displays a message indicating that a specific type of resource was not found.
+ *
+ * @component
+ * @param {NotFoundProps} props - The properties object.
+ * @param {string} props.type - The type of resource that was not found.
+ * @param {string} props.message - The message to display when the resource is not found.
+ *
+ * @example
+ * <NotFound type="repository" message="The repository you are looking for does not exist." />
+ *
+ * @returns {JSX.Element} The rendered NotFound component.
+ */
 const NotFound: React.FC<NotFoundProps> = ({
  type,
  message

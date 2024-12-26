@@ -11,6 +11,46 @@ import { artwork } from "@/assets/images";
 import SearchAutocomplete from "@/components/SearchAutocomplete";
 import logo from "@/assets/logo-navbar.svg";
 
+/**
+ * Home component representing the main page of the application.
+ * 
+ * @component
+ * @returns {JSX.Element} The rendered component.
+ * 
+ * @example
+ * <Home />
+ * 
+ * @remarks
+ * This component uses the `useNavigate` hook from `react-router-dom` to navigate between pages.
+ * It also uses the `useQuery` hook from `@apollo/client` to fetch user data from a GraphQL API.
+ * 
+ * @function useDebounce
+ * @param {Function} callback - The function to debounce.
+ * @param {number} delay - The debounce delay in milliseconds.
+ * @returns {Function} A debounced version of the callback function.
+ * 
+ * @function handleOnSelect
+ * @param {Object} item - The selected item.
+ * @param {string} item.id - The ID of the selected item.
+ * @param {string} item.name - The name of the selected item.
+ * @param {string} item.avatar - The avatar URL of the selected item.
+ * @param {string} item.bio - The bio of the selected item.
+ * 
+ * @function handleSearchChange
+ * @param {string} input - The search input value.
+ * 
+ * @function handleKeyDown
+ * @param {React.KeyboardEvent<HTMLInputElement>} event - The keyboard event.
+ * 
+ * @function formatResult
+ * @param {Object} item - The item to format.
+ * @param {string} item.avatar - The avatar URL of the item.
+ * @param {string} item.name - The name of the item.
+ * @param {string} item.bio - The bio of the item.
+ * @returns {JSX.Element} The formatted result.
+ * 
+ * @returns {JSX.Element} The rendered Home component.
+ */
 const Home: React.FC = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
@@ -117,7 +157,7 @@ const Home: React.FC = () => {
                 loading || error
                   ? []
                   : [
-                      ...users.slice(0, 5), // Display up to 5 users
+                      ...users.slice(0, 5), 
                       {
                         id: "view_all",
                         name: `View all users similar to ${searchQuery}`,

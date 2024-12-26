@@ -20,6 +20,23 @@ export interface RepositoryCardProps {
   visibility: string;
 }
 
+/**
+ * RepositoryCard component displays detailed information about a GitHub repository.
+ *
+ * @component
+ * @param {RepositoryCardProps} props - The properties for the RepositoryCard component.
+ * @param {string} props.name - The name of the repository.
+ * @param {string} [props.description] - The description of the repository.
+ * @param {Array<{ name: string }>} props.languages - The list of programming languages used in the repository.
+ * @param {number} props.stars - The number of stars the repository has received.
+ * @param {string} [props.license] - The license type of the repository.
+ * @param {string} props.createdAt - The creation date of the repository.
+ * @param {string} props.updatedAt - The last updated date of the repository.
+ * @param {string} props.url - The URL of the repository.
+ * @param {"PUBLIC" | "PRIVATE"} props.visibility - The visibility status of the repository.
+ *
+ * @returns {JSX.Element} The rendered RepositoryCard component.
+ */
 const RepositoryCard: React.FC<RepositoryCardProps> = ({
   name,
   description,

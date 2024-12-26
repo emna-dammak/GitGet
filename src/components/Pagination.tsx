@@ -6,6 +6,24 @@ interface PaginationProps {
   onPageChange: (page: number) => void;
 }
 
+/**
+ * Pagination component for navigating through pages.
+ *
+ * @component
+ * @param {PaginationProps} props - The properties for the Pagination component.
+ * @param {number} props.currentPage - The current active page.
+ * @param {number} props.totalPages - The total number of pages.
+ * @param {function} props.onPageChange - Callback function to handle page change.
+ *
+ * @returns {JSX.Element} The rendered Pagination component.
+ *
+ * @example
+ * <Pagination
+ *   currentPage={1}
+ *   totalPages={10}
+ *   onPageChange={(page) => console.log(`Page changed to ${page}`)}
+ * />
+ */
 const Pagination: React.FC<PaginationProps> = ({
   currentPage,
   totalPages,

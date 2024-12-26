@@ -13,6 +13,23 @@ export interface UserDetailsProps {
 
 
 
+/**
+ * UserDetails component displays the details of a user including their avatar, name, username, bio, 
+ * repository count, followers, following, and location.
+ *
+ * @component
+ * @param {UserDetailsProps} props - The properties for the UserDetails component.
+ * @param {string} props.name - The name of the user.
+ * @param {string} props.username - The username of the user.
+ * @param {string} props.bio - The bio of the user.
+ * @param {number} props.repositoryCount - The number of repositories the user has.
+ * @param {string} [props.location] - The location of the user.
+ * @param {string} props.avatarUrl - The URL of the user's avatar image.
+ * @param {number} props.followers - The number of followers the user has.
+ * @param {number} props.following - The number of users the user is following.
+ *
+ * @returns {JSX.Element} The rendered UserDetails component.
+ */
 const UserDetails: React.FC<UserDetailsProps> = ({
   name,
   username,
