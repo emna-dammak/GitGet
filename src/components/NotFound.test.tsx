@@ -51,7 +51,7 @@ describe("NotFound Component", () => {
     render(<NotFound {...defaultProps} />);
     const logo = screen.getByRole("img");
     expect(logo).toHaveAttribute("src", "/GitGet-simplified.svg");
-    expect(logo).toHaveAttribute("class", "w-24");
+    expect(logo).toHaveAttribute("class", "w-24 2xs:max-md:w-16");
   });
 
   it("renders a different heading and message for different props", () => {

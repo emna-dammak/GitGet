@@ -11,7 +11,7 @@ describe("Navbar Component", () => {
     // Check if the logo is rendered with correct src and alt attributes
     const logo = screen.getByAltText("Logo");
     expect(logo).toBeInTheDocument();
-    expect(logo).toHaveAttribute("src", "/logo-nabar.svg"); // Actual src
+    expect(logo).toHaveAttribute("src", "/logo-navbar.svg"); // Actual src
 
     // Check if navigation links are rendered
     const homeLink = screen.getByText("Home");
