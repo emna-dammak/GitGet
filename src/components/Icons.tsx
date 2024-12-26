@@ -31,6 +31,15 @@ import SQFIcon from "@/assets/icons/SQF.svg";
 import TexIcon from "@/assets/icons/TeX.svg";
 import VimScriptsIcon from "@/assets/icons/VimScripts.svg";
 import ZILIcon from "@/assets/icons/ZIL.svg";
+import PerlIcon from "@/assets/icons/Perl.svg";
+import RIcon from "@/assets/icons/R.svg";
+import AssemblyIcon from "@/assets/icons/Assembly.svg";
+import DockerFileIcon from "@/assets/icons/DockerFile.svg";
+import EJSIcon from "@/assets/icons/EJS.svg";
+import MakefileIcom from "@/assets/icons/Makefile.svg";
+import MDXIcon from "@/assets/icons/MDX.svg";
+import SCSSIcon from "@/assets/icons/SCSS.svg";
+
 
 
 import GenericIcon from "@/assets/icons/Generic.svg";
@@ -78,6 +87,15 @@ type IconsMap = {
  * @property {React.ComponentType} tex - Icon for TeX.
  * @property {React.ComponentType} vimscripts - Icon for Vim scripts.
  * @property {React.ComponentType} zil - Icon for ZIL.
+ * @property {React.ComponentType} perl - Icon for Perl.
+ * @property {React.ComponentType} r - Icon for R.
+ * @property {React.ComponentType} assembly - Icon for Assembly.
+ * @property {React.ComponentType} dockerfile - Icon for Dockerfile.
+ * @property {React.ComponentType} ejs - Icon for EJS.
+ * @property {React.ComponentType} makefile - Icon for Makefile.
+ * @property {React.ComponentType} mdx - Icon for MDX.
+ * @property {React.ComponentType} scss - Icon for SCSS.
+
  */
 const icons: IconsMap = {
   javascript: JavaScriptIcon,
@@ -114,6 +132,14 @@ const icons: IconsMap = {
   tex: TexIcon,
   vimscripts: VimScriptsIcon,
   zil: ZILIcon,
+  perl: PerlIcon,
+  r: RIcon,
+  assembly: AssemblyIcon,
+  dockerfile: DockerFileIcon,
+  ejs: EJSIcon,
+  makefile: MakefileIcom,
+  mdx: MDXIcon,
+  scss: SCSSIcon,
 };
 
 export default icons;
