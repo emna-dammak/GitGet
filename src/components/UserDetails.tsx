@@ -57,6 +57,11 @@ const UserDetails: React.FC<UserDetailsProps> = ({
       value: following,
       icon: "Following.svg",
     },
+    {
+      name: "Location",
+      value: location,
+      icon: "Location.svg",
+    }
   ];
 
   return (
@@ -76,7 +81,7 @@ const UserDetails: React.FC<UserDetailsProps> = ({
         <p className="text-sm text-gray-300 overflow-wrap">{bio}</p>
         <div className="flex flex-col max-md:flex-row max-sm:flex-wrap justify-center gap-4 mt-8 w-full">
           {stats.map((stat) => (
-            <div key={stat.name} className="flex items-center mt-2">
+           stat.value && <div key={stat.name} className="flex items-center mt-2">
               <img src={`/${stat.icon}`} className="mr-2 opacity-70"/>
               <div className="text-sm">
                 <span className="opacity-70">{stat.name}: </span>
@@ -86,11 +91,6 @@ const UserDetails: React.FC<UserDetailsProps> = ({
           ))
           }
         </div>
-        {location && (
-          <p>
-            <strong>Location:</strong> {location}
-          </p>
-        )}
       </div>
     </div>
   );

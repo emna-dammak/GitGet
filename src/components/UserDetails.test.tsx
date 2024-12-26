@@ -51,7 +51,7 @@ describe("UserDetails", () => {
 
     const icons = screen.getAllByRole("img");
     // First image is avatar, rest are stat icons
-    expect(icons.length).toBe(4); // 1 avatar + 3 stat icons
+    expect(icons.length).toBe(5); // 1 avatar + 3 stat icons
 
     // Check if stat icons have correct src
     expect(icons[1]).toHaveAttribute("src", "/Repositories.svg");
