@@ -219,7 +219,7 @@ const RepositoriesPage: React.FC = () => {
         ) : (
           <NotFound
             type="repository"
-            message="This user has no repository yet!"
+            message="This user has no repositories yet!"
           />
         )}
       </div>

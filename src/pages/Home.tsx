@@ -9,7 +9,6 @@ import {
 } from "../models/user";
 import { artwork } from "@/assets/images";
 import SearchAutocomplete from "@/components/SearchAutocomplete";
-import logo from "@/assets/logo-navbar.svg";
 
 /**
  * Home component representing the main page of the application.
@@ -137,7 +136,7 @@ const Home: React.FC = () => {
 
       {/* Centered Content */}
       <div className="relative z-10 text-center w-full flex items-center flex-col">
-        <img src={logo} alt="Logo" className="h-32 w-32 opacity-70" />
+        <img src='/logo-navbar.svg' alt="Logo" className="h-32 w-32 opacity-70" />
         <h1 className="text-4xl font-bold mb-4 tracking-wider opacity-70">
           GitGet
         </h1>

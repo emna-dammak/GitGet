@@ -104,7 +104,7 @@ const SimilarUsers: React.FC = () => {
       {displayedUsers.length > 0 ? (
         // User List
         <div className="container mx-auto mt-16">
-          <ul className="w-full max-w-3xl mx-auto">
+          <ul className="w-full max-w-3xl mx-auto mb-5">
             {displayedUsers.map(({ node }: SearchUsersEdge, index: number) => (
               <UserCard
                 key={index}
