@@ -1,53 +1,74 @@
-// src/components/SearchAutocomplete.stories.tsx
-import { StoryFn, Meta } from "@storybook/react";
+// src/stories/SearchAutocomplete.stories.tsx
+import { useState } from "react";
 import SearchAutocomplete, {
   SearchAutocompleteProps,
-} from "../components/SearchAutocomplete";
+} from "../components/SearchAutocomplete"; // Adjust the import path to your component
 
-// Sample data for SearchAutocomplete
-const sampleItems = [
-  { id: 1, name: "JavaScript" },
-  { id: 2, name: "TypeScript" },
-  { id: 3, name: "React" },
-  { id: 4, name: "Node.js" },
-  { id: 5, name: "CSS" },
+// Mock data for the search items
+const mockItems = [
+  { name: "Apple", id: 1 },
+  { name: "Banana", id: 2 },
+  { name: "Orange", id: 3 },
+  { name: "Pineapple", id: 4 },
+  { name: "Grape", id: 5 },
 ];
 
-const onSearch = (query: string) => {
-  console.log("Searching for:", query);
-};
-
-const onSelect = (item: any) => {
-  console.log("Selected item:", item);
-};
-
-const formatResult = (item: any) => {
-  return <div>{item.name}</div>;
-};
-
-const customStyling = {
-  height: "40px",
-  width: "300px",
-  borderRadius: "5px",
-  border: "1px solid #ccc",
-  padding: "10px",
-};
+// Default formatResult function to display item names
+const formatResult = (item: any) => <span>{item.name}</span>;
 
 export default {
-  title: "Components/SearchAutocomplete", // Storybook title (category/component)
-  component: SearchAutocomplete,
-} as Meta;
+  title: "Components/SearchAutocomplete", // Story title
+  component: SearchAutocomplete, // Component we are documenting
+  argTypes: {
+    items: { control: "array" },
+    onSearch: { action: "searched" },
+    onSelect: { action: "selected" },
+    placeholder: { control: "text" },
+    styling: { control: "object" }, // Allow styling to be controlled in Storybook
+  },
+};
 
-const Template: StoryFn<SearchAutocompleteProps> = (args) => (
-  <SearchAutocomplete {...args} />
-);
+// Default story for SearchAutocomplete
+export const Default = (args: SearchAutocompleteProps) => {
+  const [items, setItems] = useState(mockItems);
 
-export const Default = Template.bind({});
+  // Example search function, modify the items based on query
+  const handleSearch = (query: string) => {
+    if (query) {
+      setItems(
+        mockItems.filter((item) =>
+          item.name.toLowerCase().includes(query.toLowerCase())
+        )
+      );
+    } else {
+      setItems(mockItems);
+    }
+  };
+
+  // Example select function
+  const handleSelect = (item: any) => {
+    alert(`Selected: ${item.name}`);
+  };
+
+  return (
+    <SearchAutocomplete
+      {...args}
+      items={items}
+      onSearch={handleSearch}
+      onSelect={handleSelect}
+      formatResult={formatResult}
+    />
+  );
+};
+
 Default.args = {
-  items: sampleItems,
-  onSearch: onSearch,
-  onSelect: onSelect,
-  placeholder: "Search for a language...",
-  formatResult: formatResult,
-  styling: customStyling,
+  placeholder: "Search fruits...",
+  styling: {
+    backgroundColor: "#0d082d", // Light grey background
+    color:"#000000",
+    borderRadius: "5px",
+    padding: "10px",
+    width: "100%",
+    fontSize: "14px", // Custom font size
+  },
 };

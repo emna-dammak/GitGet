@@ -55,19 +55,10 @@ const SearchAutocomplete: React.FC<SearchAutocompleteProps> = ({
       {/* Dropdown with suggestions */}
       {isDropdownVisible && (
         <ul
+          className="absolute top-[80%] left-0 w-full max-h-[200px] overflow-y-auto rounded-b-lg shadow-md z-10 list-none p-0"
           style={{
-            position: "absolute",
-            top: "80%",
-            left: 0,
-            width: "100%",
-            maxHeight: "200px",
-            overflowY: "auto",
             borderRadius: "0 0 5px 5px",
-            boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
-            zIndex: 1000,
-            margin: 0,
-            padding: 0,
-            listStyle: "none",
+            ...styling
           }}
         >
           {items.length > 0 ? (
@@ -75,36 +66,23 @@ const SearchAutocomplete: React.FC<SearchAutocompleteProps> = ({
               <li
                 key={index}
                 onClick={() => handleSelect(item)}
-                style={{
-                  padding: "10px",
-                  cursor: "pointer",
-                  borderBottom: "1px  #f0f0f0",
-                  backgroundColor: "#2E3656",
-                  color: "#ffffff",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "#2E3656";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "#2E3656";
-                }}
+                className="px-3 py-2 cursor-pointer hover:bg-opacity-75 text-white"
               >
                 {formatResult(item)}
               </li>
             ))
           ) : (
-            <li
-              style={{
-                padding: "10px",
-                backgroundColor: "#2E3656",
-                color: "#ffffff",
-              }}
-            >
+            <li className="px-3 py-2 bg-opacity-75 text-white">
               Fetching results...
             </li>
           )}
         </ul>
       )}
+
+      {/* Custom scrollbar styles */}
+      <div className="scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+        {/* The content inside ul will inherit the custom scrollbar */}
+      </div>
     </div>
   );
 };
