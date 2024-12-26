@@ -22,21 +22,22 @@ const NotFound: React.FC<NotFoundProps> = ({
  type,
  message
 }) => {
-
     return (
-      <div className="w-full h-lvh flex justify-center items-center bg-[#0d082d]">
-        <div className="flex flex-col justify-center items-center m-auto">
+      <div className="relative m-auto w-[500px] 2xs:max-sm:w-[310px] sm:max-lg:w-[400px] bg-[#0d082d]">
+        <div className="flex flex-col justify-center items-center">
           <img
             src="/GitGet-simplified.svg"
             alt="GitGet logo"
-            className="w-24"
+            className="w-24 2xs:max-md:w-16"
           />
-          <div className="flex-1 sm:mr-4 text-center w-[500px] mt-4">
+          <div className="text-center  mt-4">
             <div>
-              <h2 className="text-2xl font-semibold text-white">
+              <h2 className="text-2xl 2xs:max-md:text-lg font-semibold text-white">
                 Oops! No {type} was found.
               </h2>
-              <p className="text-sm mt-2 opacity-70 text-white">{message}</p>
+              <p className="text-sm 2xs:max-md:text-xs mt-2 opacity-70 text-white">
+                {message}
+              </p>
             </div>
           </div>
         </div>
