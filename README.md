@@ -1,6 +1,9 @@
 # GitGet : GitHub Repository Search
 A React application that allows users to search for GitHub users and explore their repositories. Built with TypeScript and Vite, featuring repository filtering, similar users discovery, pagination, and dark mode UI.
+
 🌐 Live Demo: https://git-get.netlify.app/
+
+![Demo](./GiGet.gif)
 
 ## ✨ Features
 - 🔍 User search with autocomplete functionality
@@ -37,7 +40,7 @@ npm install
 ```
 3. Create a .env file in the root directory:
 ```.env
-VITE_GITHUB_TOKEN=your_personal_access_token
+VITE_GITHUB_ACCESS_TOKEN=your_personal_access_token
 ```
 4. Start the development server:
 ```console
