@@ -217,10 +217,36 @@ const RepositoriesPage: React.FC = () => {
             )}
           </div>
         ) : (
+          <div className="w-full md:w-3/4 lg:w-5/6 p-4 flex flex-col items-center">
+            <div className="mb-4 md:w-[80%] 2xs:w-full flex flex-col md:flex-row gap-6 justify-center py-4">
+              <input
+                type="text"
+                className="w-full md:w-1/2 p-2 rounded-xl bg-[#2E3656] bg-opacity-90"
+                placeholder="Search repositories"
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
+
+              <select
+                className="mt-4 md:mt-0 p-2 px-3 bg-[#2E3656] rounded-xl"
+                value={selectedLanguage}
+                onChange={handleLanguageChange}
+              >
+                <option value="all">All Languages</option>
+                {allLanguages.map((language) => (
+                  <option key={language.name} value={language.name}>
+                    {language.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="self-center top-100">
           <NotFound
             type="repository"
-            message="This user has no repositories yet!"
+            message="Either this user has no repositories yet, or there is no reporositories corresponding to your search! "
           />
+          </div>
+          </div>
         )}
       </div>
     </div>
